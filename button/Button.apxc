@@ -1,0 +1,10 @@
+public with sharing class Button {
+    @AuraEnabled(cacheable=true)
+    public static Integer getAmountContacts(String str) {
+        System.debug(str);
+        List<AggregateResult> list1 = [SELECT COUNT(Id) total FROM Contact WHERE Account.Id = :str];
+        Integer x = (Integer) list1[0].get('total');
+        System.debug(x);
+        return x; 
+    }
+}
